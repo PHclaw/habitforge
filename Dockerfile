@@ -17,6 +17,7 @@ WORKDIR /app
 COPY --from=builder /app/backend /app/backend
 COPY --from=builder /app/dist /app/frontend/dist
 RUN pip install --no-cache-dir -r backend/requirements.txt
+ENV PYTHONPATH=/app/backend
 ENV FRONTEND_PATH=/app/frontend/dist
 EXPOSE 8000
 CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000"]
