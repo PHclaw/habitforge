@@ -1,0 +1,15 @@
+﻿[railway]
+  builder = "nixpacks"
+
+[service.backend]
+  dockerfile = "backend/Dockerfile"
+  port = 8000
+
+[service.frontend]
+  dockerfile = "frontend/Dockerfile"
+  buildCommand = "npm install && npm run build"
+  startCommand = "nginx -g daemon off;"
+  port = 80
+
+[postgres]
+  plugin = "postgresql"

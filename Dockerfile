@@ -1,0 +1,22 @@
+FROM python:3.11-slim AS builder
+WORKDIR /app
+
+RUN apt-get update && apt-get install -y nodejs npm && rm -rf /var/lib/apt/lists/*
+
+COPY frontend/package.json frontend/package-lock.json* ./
+RUN npm ci 2>/dev/null || npm install
+COPY frontend/ ./
+RUN npm run build
+
+COPY backend/ ./backend/
+COPY backend/requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt
+
+FROM python:3.11-slim
+WORKDIR /app
+COPY --from=builder /app/backend /app/backend
+COPY --from=builder /app/dist /app/frontend/dist
+RUN pip install --no-cache-dir -r requirements.txt
+ENV FRONTEND_PATH=/app/frontend/dist
+EXPOSE 8000
+CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000"]

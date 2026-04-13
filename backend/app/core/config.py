@@ -13,6 +13,7 @@ class Settings(BaseSettings):
     OPENAI_API_KEY: Optional[str] = os.getenv("OPENAI_API_KEY")
     OPENAI_BASE_URL: str = os.getenv("OPENAI_BASE_URL", "https://api.deepseek.com")
     LLM_MODEL: str = "deepseek-chat"
+    RAILWAY_PUBLIC_DOMAIN: Optional[str] = os.getenv("RAILWAY_PUBLIC_DOMAIN")
     class Config:
         env_file = ".env"
         case_sensitive = True
