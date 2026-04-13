@@ -1,0 +1,10 @@
+yaml:
+  name: habitforge
+  version: 1
+
+build:
+  method: docker
+  dockerfile: Dockerfile
+
+start:
+  cmd: uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
