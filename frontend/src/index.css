@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #6366f1;
+  --primary-light: #818cf8;
+  --primary-dark: #4f46e5;
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --dark: #0f172a;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: #f8fafc;
+  color: #1e293b;
+  min-height: 100vh;
+}
+
+.btn-primary {
+  @apply bg-primary hover:bg-primary-dark text-white px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer;
+}
+.btn-secondary {
+  @apply bg-gray-100 hover:bg-gray-200 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer;
+}
+.btn-danger {
+  @apply bg-danger hover:bg-red-600 text-white px-4 py-2 rounded-lg font-medium transition-colors cursor-pointer;
+}
+.card {
+  @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-5;
+}
+.streak-badge {
+  @apply inline-flex items-center gap-1 text-sm font-bold text-orange-500;
+}
