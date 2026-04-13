@@ -10,13 +10,13 @@ RUN npm run build
 
 COPY backend/ ./backend/
 COPY backend/requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r backend/requirements.txt
 
 FROM python:3.11-slim
 WORKDIR /app
 COPY --from=builder /app/backend /app/backend
 COPY --from=builder /app/dist /app/frontend/dist
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir -r backend/requirements.txt
 ENV FRONTEND_PATH=/app/frontend/dist
 EXPOSE 8000
 CMD ["uvicorn", "backend.app.main:app", "--host", "0.0.0.0", "--port", "8000"]
